@@ -1,18 +1,22 @@
 <?php
 
-require_once '../app/Router.php';
+declare(strict_types = 1);
 
-$url = $_SERVER['REQUEST_URI'];
+use App\Router;
+use App\Controllers\HomeController;
 
-$urlPath = parse_url($url)['path'];
+require_once __DIR__ . '/../vendor/autoload.php';
 
-$routes = [
-    '/' => '../app/Controllers/HomeController.php',
-    '/about' => '../app/Controllers/AboutUs.php'
-];
-
+define('VIEW_PATH', __DIR__ . '/../resources/views');
 
 $router = new Router();
 
+$router
+    ->get('/', [HomeController::class, 'index'])
+    ->post('/upload', [HomeController::class, 'upload'])
+    ;
 
-$router->routeToController($urlPath, $routes);
+echo $router->resolve(
+    $_SERVER['REQUEST_URI'],
+    strtolower($_SERVER['REQUEST_METHOD'])
+);

@@ -1,3 +1,11 @@
 <?php
 
-echo 'About us';
+namespace App\Controllers;
+
+class AboutUs
+{
+    public function index()
+    {
+        echo 'Hello About us';
+    }
+}
