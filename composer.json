@@ -10,5 +10,7 @@
             "name": "arman.fayziev"
         }
     ],
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.5"
+    }
 }
