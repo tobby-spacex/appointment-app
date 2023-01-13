@@ -5,7 +5,6 @@ declare(strict_types = 1);
 use App\Router;
 use App\Controllers\AuthController;
 use App\Controllers\HomeController;
-use App\Database;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -20,6 +19,7 @@ $router
     ->get('/', [HomeController::class, 'index'])
     ->get('/signup', [AuthController::class, 'signup'])
     ->get('/login', [AuthController::class, 'login'])
+    ->post('/register', [AuthController::class, 'register'])
     ->post('/upload', [HomeController::class, 'upload'])
     ;
 
