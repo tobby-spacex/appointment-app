@@ -20,6 +20,7 @@ $router
     ->get('/signup', [AuthController::class, 'signup'])
     ->get('/login', [AuthController::class, 'login'])
     ->post('/register', [AuthController::class, 'register'])
+    ->post('/signin', [AuthController::class, 'signin'])
     ->post('/upload', [HomeController::class, 'upload'])
     ;
 

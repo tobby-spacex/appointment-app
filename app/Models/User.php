@@ -21,7 +21,5 @@ class User extends Model
         );
 
         $stmt->execute([$userName , $email, $password]);
-
-        return header('Location: /'); 
     }
 }

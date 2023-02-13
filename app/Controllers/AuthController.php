@@ -26,7 +26,7 @@ class AuthController
             $name  =  $_POST['name'];
             $email =  $_POST['email'];
             $password =  $_POST['password'];
-            $password_confirm = $_POST['password_confirm'];
+            $password_confirm = $_POST['confirm_password'];
 
             if(empty($name) || empty($email) || empty($password) || empty($password_confirm)) {
                 $error_message = 'empty';
@@ -34,16 +34,25 @@ class AuthController
                 $error_message = 'password must match';
             } else {
                 $user = new User();
+
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                 
                 $userData = array(
                     'name' => $name,
                     'email' => $email, 
-                    'password' => $password
+                    'password' => $hashedPassword
                 );
 
                 $user->register($userData);
             }
+
+            return header('Location: /'); 
         }
- 
+
+    }
+
+    // Sign In User
+    public function signin() {
+
     }
 }
