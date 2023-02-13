@@ -34,13 +34,11 @@ class AuthController
                 $error_message = 'password must match';
             } else {
                 $user = new User();
-
-                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                 
                 $userData = array(
                     'name' => $name,
                     'email' => $email, 
-                    'password' => $hashedPassword
+                    'password' => $password
                 );
 
                 $user->register($userData);
@@ -53,6 +51,29 @@ class AuthController
 
     // Sign In User
     public function signin() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $userModel = new User();
+            $email  =  $_POST['email'];
+            $password =  $_POST['password'];
 
+            $userData = $userModel->signin($email);
+            
+            if($userData) {
+                if(password_verify($password, $userData['password'])) {
+                    session_start();
+                    session_regenerate_id();
+                    
+                    $_SESSION["user_id"] = $userData["user_id"];
+
+                    header("Location: /");
+                    exit;
+                } else {
+                    echo 'Password does not match.';
+                }
+            } else {
+                echo 'false';
+            }
+        }
+    
     }
 }

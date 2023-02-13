@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Models;
 
 use App\Model;
+use PDO;
 
 class User extends Model
 {
@@ -21,5 +22,12 @@ class User extends Model
         );
 
         $stmt->execute([$userName , $email, $password]);
+    }
+
+    // Sign In User
+    public function signin(string $email): array|bool {
+        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE email LIKE ?');
+        $stmt->execute([$email]);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 }
