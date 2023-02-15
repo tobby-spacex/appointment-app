@@ -5,6 +5,7 @@ declare(strict_types = 1);
 use App\Router;
 use App\Controllers\AuthController;
 use App\Controllers\HomeController;
+use App\Controllers\AppointmentController;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -19,6 +20,7 @@ $router
     ->get('/', [HomeController::class, 'index'])
     ->get('/signup', [AuthController::class, 'signup'])
     ->get('/login', [AuthController::class, 'login'])
+    ->get('/calendar', [AppointmentController::class, 'index'])
     ->post('/register', [AuthController::class, 'register'])
     ->post('/signin', [AuthController::class, 'signin'])
     ->post('/upload', [HomeController::class, 'upload'])
