@@ -62,8 +62,11 @@ class AuthController
                 if(password_verify($password, $userData['password'])) {
                     session_start();
                     session_regenerate_id();
-                    
-                    $_SESSION["user_id"] = $userData["user_id"];
+
+                    $_SESSION["user_id"]   = $userData["user_id"];
+                    $_SESSION["user_name"] = $userData["username"];
+                    $_SESSION["logged_in"]  = true;
+
 
                     header("Location: /");
                     exit;

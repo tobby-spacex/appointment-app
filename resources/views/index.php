@@ -1,5 +1,5 @@
 <?php include 'partials/_header.php'; ?>
-
+<?php session_start(); ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -17,7 +17,26 @@
         <a class="nav-link disabled" href="#">Disabled</a>
       </li>
     </ul>
-    <a href="/login"> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Log In</button></a>
+  
+    <?php if (isset($_SESSION['logged_in'])): ?>
+      <a href=""> 
+        Hello <?= $_SESSION['user_name'] ?>
+      </a>
+
+      <button type="button" class="btn btn-secondary" data-toggle="modal">
+        Sign Out
+      </button>
+
+    <?php else: ?>
+
+    <a href="/login"> 
+      <button type="button" class="btn btn-primary" data-toggle="modal">
+        Log In
+      </button>
+    </a>
+
+    <?php endif; ?>
+    
   </div>
 </nav>
 
